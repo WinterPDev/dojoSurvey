@@ -12,17 +12,17 @@
 <body>
 
 @{
-
+@model dojoSurvey.Models.User
 }
 
 
 <div class="nes-container d-flexin justify-content-center w-50 mt-5">
     <h5><u>Submitted Info : </u></h1>
     
-    <p><h6>Name : @ViewBag.name </h6></p>
-    <p><h6>Location : @ViewBag.location </h6></p>
-    <p><h6>Language : @ViewBag.language </h6></p>
-    <p><h6>Comment : @ViewBag.comment </h6></p>
+    <p><h6>Name : @Model.Name </h6></p>
+    <p><h6>Location : @Model.Location </h6></p>
+    <p><h6>Language : @Model.Language </h6></p>
+    <p><h6>Comment : @Model.Comment </h6></p>
 
 <a href="/" class="nes-btn is-primary">Go Back</a>
 </div>

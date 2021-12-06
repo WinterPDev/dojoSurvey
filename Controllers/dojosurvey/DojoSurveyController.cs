@@ -1,15 +1,14 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using dojoSurvey.Models;
+
 using System;
 
 namespace dojoSurvey.Controllers
 {
     public class DojoSurveyController : Controller
     {
-        public static string uName;
-        public static string uLocation;
-        public static string uLanguage;
-        public static string uComment;
+        static User newUser;
 
         [HttpGet]
         [Route("")]
@@ -17,26 +16,26 @@ namespace dojoSurvey.Controllers
         {
             return View("Index");
         }
-    
+
         [HttpGet("Result")]
         public IActionResult Result()
         {
-            ViewBag.name = uName;
-            ViewBag.location = uLocation;
-            ViewBag.language = uLanguage;
-            ViewBag.comment = uComment;
-            return View("Result");
+            return View(newUser);
         }
 
-        [HttpPost]
-        [Route("submitsurvey")]
-        public IActionResult submitsurvey(string Name, string Location, string Language, string Comment)
-        {
-            uName = Name;
-            uLocation = Location;
-            uLanguage = Language;
-            uComment = Comment;
+
+        [HttpPost("submitsurvey")]
+        public IActionResult submitsurvey(User surveyUser)
+        {
+            if(ModelState.IsValid)
+            {
+            newUser = surveyUser;
             return RedirectToAction("Result");
-        }
+            }
+            else
+            {
+            return View("Index");
+            }
+        }
     }
 }
